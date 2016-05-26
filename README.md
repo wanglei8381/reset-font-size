@@ -18,10 +18,10 @@
 
 ###用法
 方式1<br>
-<script src="resetFontSize.js?375&20&1"></script> <br>
+&gl;script src="resetFontSize.js?375&20&1">&gl;/script> <br>
 375&32&1 : 一次顺序，基础视图大小&基础字体大小&初始化的缩放比例   <br>
 
 方式2<br>
-<script src="resetFontSize_XXXXX.js" data-alias="resetFontSize" data-size="375" data-scale="1" data-fontSize="32"></script> <br>
+&gl;script src="resetFontSize_XXXXX.js" data-alias="resetFontSize" data-size="375" data-scale="1" data-fontSize="32">&gl;/script> <br>
 如果更改js的名字，要加上data-alias="resetFontSize"来表明; <br>
 data-size:基础视图大小；data-scale:初始化的缩放比例；data-fontSize：基础字体大小
