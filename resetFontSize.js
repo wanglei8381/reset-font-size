@@ -4,8 +4,9 @@
     [].some.call(document.getElementsByTagName('script'), function (item) {
         if (item.src) {
             var paths = item.src.split('?');
-            if (paths[0].indexOf('resetFontSize.js') > -1) {
-                viewPortSize = parseInt(paths[1]) || viewPortSize;
+            var alias = item.getAttribute('data-alias');
+            if (paths[0].indexOf('resetFontSize.js') > -1 || alias && alias.indexOf('resetFontSize') > -1) {
+                viewPortSize = parseInt(paths[1]) || parseInt(item.getAttribute('data-size')) || viewPortSize;
                 return true;
             }
         }
