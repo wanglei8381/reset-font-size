@@ -17,14 +17,11 @@
     return defaultFontSize;
   }
 
-  function getViewport (doc, docEl) {
-    var meta = doc.querySelector('meta[name="viewport"]')
-    if (meta) return meta
+  function createViewPort (doc, docEl, scale) {
     meta = doc.createElement('meta')
     meta.setAttribute('name', 'viewport')
     meta.setAttribute('content', 'width=device-width,initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=no')
     docEl.firstElementChild.appendChild(meta)
-    docEl.setAttribute('data-dpr', dpr)
     return meta
   }
 
@@ -33,13 +30,21 @@
     isIPhone = window.navigator.appVersion.match(/iphone/gi),
     doc = document,
     docEl = doc.documentElement,
+    metaEl = doc.querySelector('meta[name="viewport"]'),
     baseSize = 750,
     baseFontSize = 100,
     defaultFontSize = getDefaultFontSize(),
-    dpr = window.devicePixelRatio || 1,
-    dpr = dpr >= 3 ? 3 : dpr >= 2 ? 2 : 1,
-    scale = (isAndroid || isIPhone) ? 1 / dpr : 1;
-    metaEl = getViewport(doc, docEl, scale);
+    dpr;
+  
+  // 使用用户自定义了viewport
+  if (metaEl) {
+    dpr = 1
+  } else {
+    dpr = window.devicePixelRatio || 1
+    dpr = dpr >= 3 ? 3 : dpr >= 2 ? 2 : 1
+    createViewPort(doc, docEl, 1 / dpr)
+  }
+  docEl.setAttribute('data-dpr', dpr)
 
   var reset = function () {
     //方案一px
